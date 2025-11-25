@@ -1,0 +1,38 @@
+%! TEX root = ../../main.tex
+
+%% Illustration of cone decomposition. 
+
+\begin{tikzpicture}[scale=1,
+		declare function={
+				loss(\x)= (4*(\x - 4)^2 + 4)*(x<=4.5) + (2*(\x - 5)^2 + 4.5)*(x>4.5);
+			}
+	]
+	\begin{axis}[width=\linewidth, height=6cm,
+			axis lines=center, yticklabels={,,}, xticklabels={,,},
+			ymin=-2, ymax=6, ytick={-2,...,5}, ylabel=$$, x axis line style={-},
+				xmin=-6, xmax=6, xtick={-5,...,5}, xlabel=$$, y axis line style={-},
+		]
+		\addplot[name path=loss, domain=-6:6, samples=200, line width=1pt, color=bad]{loss(x)};
+		\node[label=left:$w_1^*$, circle, fill, inner sep=1pt] at (axis cs:4,4) {};
+
+		\draw [name path=cone_1, solid, line width=1pt] (axis cs:0,-2) -- (axis cs:0,6);
+		\draw [name path=bounds, line width=0pt] (axis cs:-6,-2) -- (axis cs:-6,6);
+		\tikzfillbetween[of=cone_1 and bounds, on layer=ft]{good, opacity=0.1};
+
+		%% point labels
+		% origin point
+		\node[circle, fill, inner sep=1pt] at (axis cs:0,0) {};
+
+		% active examples 
+		\node[label=right:$(x_1\!\mathbin{,} y_1)$, circle, fill, inner sep=0.5mm] at (axis cs:-5,1) {};
+		\node[label=right:$(x_2\!\mathbin{,} y_2)$, circle, draw, line width=0.25mm, inner sep=0.5mm] at (axis cs:0.5,5) {};
+
+
+		% lines
+		\draw [->, draw=bad, line width = 1mm] (axis cs:0,0) -- (axis cs:-1,0) node[near end,above] {$w^*_{1}$};
+
+		\node[] at (axis cs:-4,5) { $ \lambda \uparrow \uparrow$ };
+    \node[text width=13em, text centered] at (axis cs:3,2) { \bad{Solution path} \bad{is discontinuous!} };
+	\end{axis}
+
+\end{tikzpicture}%

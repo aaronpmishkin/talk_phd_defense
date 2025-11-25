@@ -1,0 +1,117 @@
+% Copyright 2007 by Aaron Mishkin 
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\mode<presentation>
+
+\setbeamertemplate{navigation symbols}{}
+
+\newcommand{\collaborators}[1]{\gdef\@collaborators{#1}}
+
+% title page
+
+\defbeamertemplate*{title page}{simplebeamer}[1][]
+{
+	\vbox{}
+	{\hfill \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+	\vfill
+	\begingroup
+	\centering
+	\vskip0.75em%
+	\begin{beamercolorbox}[wd=\hsize, center]{titlebg}
+		\begin{beamercolorbox}[sep=8pt, center]{title}
+			\usebeamerfont{title}\inserttitle\par%
+			\ifx\insertsubtitle\@empty%
+			\else%
+				\vskip0.25em%
+				{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+			\fi%     
+		\end{beamercolorbox}%
+		\vskip0.75em\par
+		\begin{beamercolorbox}[sep=8pt,center]{author}
+			\usebeamerfont{author}\insertauthor
+		\end{beamercolorbox}
+		\begin{beamercolorbox}[sep=8pt,center]{author}
+			\usebeamerfont{author}\insertinstitute
+		\end{beamercolorbox}
+		\begin{beamercolorbox}[sep=8pt,center]{date}
+			\usebeamerfont{date}\insertdate
+		\end{beamercolorbox}
+		\begin{figure}
+			\vskip-1.75em
+			\@collaborators
+		\end{figure}
+	\end{beamercolorbox}
+	\endgroup
+}
+
+\defbeamertemplate*{frametitle}{simplebeamer}[1][]
+{\insertframetitle\strut%
+	\vskip0\baselineskip%
+	\leaders\vrule width \textwidth\vskip0.4pt%
+	\vskip0pt%
+	\nointerlineskip}
+
+
+\setbeamertemplate{itemize item}{$\bullet$}
+\setbeamertemplate{footline}[text line]{%
+	\hspace{\textwidth} \hspace{1.2em} \strut{%
+		\normalsize\sf\color{black!60}%
+		\sfrac{\insertframenumber}{55}
+	}%
+	% \hfill%
+}
+
+\AtBeginSection[]{
+	{ \setbeamercolor{background canvas}{bg=LightCharcoal}
+			\begin{frame}
+				\vfill
+				\centering
+				\begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+					\usebeamerfont{title} \insertsectionhead\par%
+				\end{beamercolorbox}
+				\vfill
+			\end{frame}
+		}}
+
+\setbeamerfont{bibliography item}{size=\footnotesize}
+\setbeamerfont{bibliography entry author}{size=\footnotesize}
+\setbeamerfont{bibliography entry title}{size=\footnotesize}
+\setbeamerfont{bibliography entry location}{size=\footnotesize}
+\setbeamerfont{bibliography entry note}{size=\footnotesize}
+
+% Define some colors:
+\definecolor{DarkFern}{HTML}{407428}
+\definecolor{DarkCharcoal}{HTML}{4D4944}
+\definecolor{CardinalRed}{HTML}{9d2235}
+\definecolor{LightCyan}{rgb}{0.88, 1.0, 1.0}
+
+\colorlet{Fern}{DarkFern!85!white}
+\colorlet{LightFern}{DarkFern!20!white}
+\colorlet{Charcoal}{DarkCharcoal!85!white}
+\colorlet{LightCharcoal}{Charcoal!50!white}
+\colorlet{AlertColor}{orange!80!black}
+\colorlet{DarkRed}{red!70!black}
+\colorlet{DarkBlue}{blue!70!black}
+\colorlet{DarkGreen}{green!70!black}
+\colorlet{LightRed}{CardinalRed!15!white}
+
+% Use the colors:
+\setbeamercolor{titlebg}{bg=LightCyan}
+\setbeamercolor{title}{fg=DarkBlue}
+\setbeamercolor{frametitle}{fg=DarkBlue}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{block title}{fg=black,bg=Fern!25!white}
+\setbeamercolor{block body}{fg=black,bg=Fern!25!white}
+\setbeamercolor{alerted text}{fg=AlertColor}
+\setbeamercolor{itemize item}{fg=DarkCharcoal}
+\setbeamercolor{result}{bg=LightFern}
+\setbeamercolor{relaxation}{bg=LightRed}
+\mode
+<all>
+

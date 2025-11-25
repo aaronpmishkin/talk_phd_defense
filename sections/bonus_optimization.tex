@@ -1,0 +1,857 @@
+%!TEX root = ../main.tex
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Additional Projects
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Directional Smoothness: Summary}
+    \citep{mishkin2024directional}
+    Directional Smoothness and Gradient Methods: Convergence and Adaptivity.
+    \good{A. Mishkin}*, A. Khaled*, Y. Wang, A. Defazio, R. M.  Gower. NeurIPS
+    2024.
+
+    \horizontalrule
+
+    \pause
+    \textbf{Big Idea}: GD is a local algorithm, so the analysis should be
+    local.
+    \vspace{1ex}
+
+    \pause
+    \textbf{Main Contributions}:
+    \pause
+    \vspace{0.5ex}
+    \begin{itemize}
+        \item \good{Directional Smoothness}: concrete functions \( M(x, y) \)
+              that measure the Lipschitz smoothness of \( f \) between \( x \)
+              and \( y \).
+              \pause
+              \vspace{1ex}
+
+        \item \good{Path-Dependent Rates}: Convergence bounds for gradient descent
+              that depend only on \( M(\xkk, \xk) \).
+              \pause
+              \vspace{1ex}
+
+        \item \good{Adaptive Methods}: algorithms which are ``strongly adaptive''
+              to the directional smoothness along the optimization path.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Level Set Teleportation: Summary}
+    \citep{mishkin2025level}
+    Level Set Teleportation: An Optimization Perspective. \good{A.  Mishkin},
+    A. Bietti, R. M. Gower. AISTATS 2025.
+
+    \horizontalrule
+    \pause
+
+    \textbf{Big Idea}: rigorously analyze and experimentally evaluate
+    Newton-like ``teleportation'' methods \citep{zhao2022symmetry}.
+
+    \vspace{1ex}
+
+    \pause
+    \textbf{Main Contributions}:
+    \pause
+    \vspace{0.5ex}
+    \begin{itemize}
+        \item \good{Sub-Level Set Teleportation}:
+              a co-routine to accelerate optimization by maximizing the gradient
+              over a sub-level set,
+              \[
+                  x_k^+ = \argmin_x \cbr{\norm{\grad(x)}_2 : f(x) \leq f(x_k)}.
+              \]
+              \pause
+
+        \item We give a novel analysis combining \good{linear progress}
+              from teleportation with sub-linear
+              rates for non-strongly convex GD.
+
+              \pause
+              \vspace{1ex}
+
+        \item We also develop \good{parameter-free algorithms} for solving
+              general, non-linear sub-level set teleportation problems in
+              practice.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Glocal Smoothness: Summary}
+    \citep{fox2025glocal}
+    Glocal Smoothness: Line Search can really help! C. Fox, \good{A.  Mishkin},
+    S. Vaswani, M. Schmidt. SIOPT (\red{In Review}).
+
+    \horizontalrule
+
+    \pause
+    \textbf{Big Question}: Can we show provable speed-ups from line-search?
+    \vspace{1ex}
+
+    \pause
+    \textbf{Main Contributions}:
+    \pause
+    \vspace{0.5ex}
+    \begin{itemize}
+        \item \good{Glocal smoothness}: functions which are globally
+              \( L \)-Lipschitz smooth and locally \( L^* \)-smooth
+              (\( L^* \ll L \)) around minimizers.
+              \pause
+              \vspace{1ex}
+
+        \item Convergence rates showing GD with exact line-search and GD with
+              the Polyak step-size \good{adapt} to glocal smoothness.
+
+              \pause
+              \vspace{1ex}
+
+        \item Extensions to \good{Nesterov acceleration}, with and without
+              a backtracking line-search.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Greedy Block-Coordinate Descent: Summary}
+    \citep{ramesh2023greedy}
+    Greedy 2-Coordinate Updates for Equality-Constrained Optimization via Steepest
+    Descent in the 1-Norm. A. V. Ramesh*, \good{A. Mishkin}*, M. Schmidt, et al.
+    (\red{To Be Submitted})
+
+    \horizontalrule
+    \pause
+
+    \textbf{Problem}: greedy rules out-perform random selection for training
+    SVMs, but rates don't reflect this.
+
+    \vspace{1ex}
+
+    \pause
+    \textbf{Main Contributions}:
+    \pause
+    \vspace{0.5ex}
+    \begin{itemize}
+        \item New analyses of \good{block-coordinate descent} for separable
+              optimization problems with linear coupling constraints.
+              \pause
+              \vspace{1ex}
+
+        \item \good{Single Constraint}: We prove that the GS-q rule
+              \citep{tseng2009block} is equivalent to steepest descent in the
+              \( \ell_1 \)-norm, leading to fast rates with \( \mu_1 \)
+              dependence.
+
+              \pause
+              \vspace{1ex}
+
+        \item \good{Multiple Constraints}: We extend the conformal vector
+              framework used by \citet{tseng2009block} to obtain rates
+              which improve with block-size.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Gradient Flows: Summary}
+    Global Convergence of Gradient Flow on 1D Data with Sign Noise.  \good{A.
+        Mishkin}, F. Bach. (\red{Ongoing})
+
+    \horizontalrule
+    \pause
+
+    \textbf{Big Idea}: understand how ``neuron diversity'' affects convergence
+    of the gradient flow for shallow ReLU networks.
+
+    \vspace{1ex}
+
+    \pause
+    \textbf{Main Contributions}:
+    \pause
+    \vspace{0.5ex}
+    \begin{itemize}
+        \item \good{Diversity}: model neurons have different activation patterns.
+              \pause
+              \vspace{1ex}
+
+        \item We find diversity is preserved for simple anti-correlated noise
+              and the gradient flow is \good{globally convergent}.
+              \pause
+              \vspace{1ex}
+
+        \item The gradient flow demonstrates \good{saddle-to-saddle dynamics}
+              \citep{pesme2023saddle}, with saddles corresponding to model
+              complexity.
+              \pause
+              \vspace{1ex}
+    \end{itemize}
+
+    \textbf{Remaining Extensions}:
+    \pause
+    \begin{enumerate}
+        \item Generalize the target noise to more \bad{interesting/realistic}
+              regimes (e.g. fractional Brownian motion).
+    \end{enumerate}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Background on Convex Neural Networks
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Bonus: Convex Neural Networks}
+    \begin{itemize}
+        \item Let \( X \in \R^{n \times d} \) be a training matrix and \( y \in \R^n \)
+              the targets.
+              \vspace{1ex}
+              \pause
+
+        \item Let \( f_\theta : \R^n \into \R \) be a neural network with parameters
+              \( \theta \).
+    \end{itemize}
+    \vspace{1ex}
+    \pause
+    The standard ERM training problem is,
+    \[
+        \Theta^* = \argmin_{\theta} \sum_{i=1}^n \mathcal{L}(f_\theta(x_i), y_i) + r(\theta),
+    \]
+    where \( \calL \) is a loss function and \( r \) is a regularizer.
+    \pause
+    \vspace{1ex}
+
+    \begin{itemize}
+        \item \( f_\theta \) is a \good{convex neural network} if this problem
+              is convex in \( \theta \).
+              \vspace{1ex}
+              \pause
+        \item This is distinct from \bad{input-convex} neural networks, where
+              \( x \mapsto f_\theta(x) \) is convex \citep{amos2017input}.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bonus: Brief Literature Review}
+    There are multiple flavours of convex neural networks:
+    \vspace{1ex}
+
+    \begin{itemize}
+        \item \citet{bengio2005convex} develop a \good{gradient-boosting algorithm}
+              where the problem of adding one neuron at a time is convex.
+              \pause
+              \vspace{1ex}
+
+        \item \citet{bach2017breaking} study the generalization performance of
+              \good{infinite-width} two-layer neural networks (which are convex).
+              \pause
+              \vspace{1ex}
+
+        \item \citet{pilanci2020convex} develop finite-width \textbf{convex
+                  reformulations} for two-layer ReLU networks using \good{duality}.
+              \pause
+    \end{itemize}
+    \vspace{1ex}
+
+    These approaches differ primarily in how they discretize the underlying
+    infinite-width neural network.
+
+\end{frame}
+
+\begin{frame}{Bonus: Function Space Viewpoint}
+    \citet{bengio2005convex, bach2017breaking} take a function space approach:
+
+    \begin{itemize}
+        \item Let \( \sigma \) be an activation function and define
+              \[
+                  \calH = \cbr{h : w \in \R^d, h(x) = \sigma(x^\top w)}.
+              \]
+              \pause
+
+        \item Write problem as optimization over function space \( W \):
+              \[
+                  \min_{w \in \calW} \cbr{\sum_{j=1}^n L\rbr{\sum_{h_i \in \calH} w_i h_i(x_j), y_j} + R(w)}.
+              \]
+
+              \pause
+
+        \item If \( R \) is sparsity inducing, then the final network may have finite width.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bonus: Related Work Cont.}
+    \citet{bengio2005convex}: algorithm-focused approach.
+    \vspace{1ex}
+    \begin{itemize}
+        \item Take \( R(w) = \norm{w}_1 \) and \( L(\hat y, y) = \max\cbr{0, 1 - \hat y y} \).
+              \pause
+              \vspace{1ex}
+        \item Show that \( \text{nnz}(w^*) \leq n+1 \), meaning the final model is finite.
+              \pause
+              \vspace{1ex}
+        \item Propose a boosting-type algorithm for iteratively adding neurons.
+    \end{itemize}
+
+\end{frame}
+\begin{frame}{Bonus: Related Work Cont.}
+    \citet{bach2017breaking}: analysis-focused approach.
+
+    \begin{itemize}
+        \item Handle spaces/functions properly using measure theory.
+              \vspace{1ex}
+              \pause
+              \begin{itemize}
+                  \item \( \calW \) is a space of signed measures, prediction is
+                        \[
+                            f(x) = \int_{\calH} h(x) dw(h)
+                        \]
+                        \vspace{1ex}
+                        \pause
+
+                  \item \( R \) is weighted total variation of measure \( w \).
+                        \pause
+                        \vspace{1ex}
+
+                  \item Setup reduces to \citet{bengio2005convex} in finite spaces.
+              \end{itemize}
+
+              \pause
+              \vspace{1ex}
+        \item Guarantee that \( m^* \leq n \) using a representer theorem.
+              \pause
+              \vspace{1ex}
+
+        \item Derive an incremental algorithm based on Frank-Wolfe, but incremental steps are NP-Hard
+              for ReLU activations.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bonus: Key Representer Theorem}
+    \begin{theorem}[\citet{rogosinski1958moments}]
+        If \( \rbr{\Omega, \calB} \) is a Borel space, \( \mu \) is a measure,
+        \( g_i \), \( i \in \cbr{1, \ldots n} \) are measurable and \( \mu \)-integrable,
+        then there exists measure \( \hat \mu \) with finite support at most \( n \)
+        such that
+        \[
+            \int_\Omega g_i(\omega) d\mu(\omega) = \int_\Omega g_i(\omega) d \hat \mu(\omega)
+        \]
+        for all \( i \in \cbr{1,\ldots,n} \).
+    \end{theorem}
+
+    Prediction for dataset with \( n \) dimensions:
+    \[
+        f(x_i) = \int_{\calH} h(x_i) dw(h) = \sum_{h = 1}^m h_j(x_i) w(h_j),
+    \]
+    where \( m \leq n \) and \( h_j(x) = \rbr{\abr{x, w_j}}_+ \).
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Convex Reformulations
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Convex Reformulations: Breaking it Down}
+
+    \[
+        \begin{aligned}
+            \min_{u} & \norm{\sum_{j=1}^p D_j X (v_j - w_j) - y}_2^2 +
+            \lambda \sum_{j=1}^p \norm{v_j}_2 + \norm{w_j}_2           \\
+                     & \hspace{0.2em} \text{s.t. }
+            v_j, w_j \in \calK_j := \cbr{w : (2D_j - I) X w \geq 0},
+        \end{aligned}
+    \]
+    where \( \purple{D_j = \text{diag}[\mathbbm{1}(X g_j \geq 0)]} \).
+
+    \horizontalrule
+
+    \begin{itemize}
+        \item \purple{\( D_j \) is a ReLU activation pattern induced by ``gate'' \( g_j \).}
+              \pause
+              \begin{itemize}
+                  \item \([D_j]_{ii} = 1\) if \( \abr{x_i, g_i} \geq 0 \) and \( 0 \) otherwise.
+              \end{itemize}
+
+    \end{itemize}
+    \vspace{7.3em}
+\end{frame}
+
+\begin{frame}{Convex Reformulations: Breaking it Down}
+
+    \[
+        \begin{aligned}
+            \min_{u} & \norm{\sum_{j=1}^p D_j X (v_j - w_j) - y}_2^2 +
+            \purple{\lambda \sum_{j=1}^p \norm{v_j}_2 + \norm{w_j}_2}  \\
+                     & \hspace{0.2em} \text{s.t. }
+            v_j, w_j \in \calK_j := \cbr{w : (2D_j - I) X w \geq 0}
+        \end{aligned}
+    \]
+    where \( D_j = \text{diag}[\mathbbm{1}(X g_j \geq 0)] \).
+
+    \horizontalrule
+
+    \begin{itemize}
+        \item \( D_j \) is a ReLU activation pattern induced by ``gate'' \( g_j \).
+              \begin{itemize}
+                  \item \([D_j]_{ii} = 1\) if \( \abr{x_i, g_i} \geq 0 \) and \( 0 \) otherwise.
+              \end{itemize}
+        \item \purple{Weight-decay regularization turns into ``group \( \ell_1 \)'' penalty.}
+    \end{itemize}
+    \vspace{6em}
+\end{frame}
+
+\begin{frame}{Convex Reformulations: Breaking it Down}
+
+    \[
+        \begin{aligned}
+            \min_{u} & \norm{\sum_{j=1}^p D_j X (v_j - w_j) - y}_2^2 +
+            \lambda \sum_{j=1}^p \norm{v_j}_2 + \norm{w_j}_2           \\
+                     & \hspace{0.2em} \purple{\text{s.t. }
+                v_j, w_j \in \calK_j := \cbr{w : (2D_j - I) X w \geq 0},}
+        \end{aligned}
+    \]
+    where \( D_j = \text{diag}[\mathbbm{1}(X g_j \geq 0)] \).
+
+    \horizontalrule
+
+    \begin{itemize}
+        \item \( D_j \) is a ReLU activation pattern induced by ``gate'' \( g_j \).
+              \begin{itemize}
+                  \item \([D_j]_{ii} = 1\) if \( \abr{x_i, g_i} \geq 0 \) and \( 0 \) otherwise.
+              \end{itemize}
+        \item Weight-decay regularization turns into ``group \( \ell_1 \)'' penalty.
+        \item \purple{The constraint \( v_j \in \calK_j \) implies
+                  \[
+                      \rbr{X v_j}_+ = D_j X v_j.
+                  \]
+                  That is, \( v_j \) has the activation encoded by \( D_j \).
+              }
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bonus: Explicit Solution Mapping}
+
+    Given \( \rbr{v^*, w^*} \), an optimal non-convex ReLU network is given by
+
+    \begin{equation*}
+        \textbf{C to NC:} \quad \quad
+        \begin{aligned}
+            W_{1i} & = v_i^*/ \sqrt{\norm{v_i^*}}, \quad w_{2i} = \sqrt{\norm{v_i^*}}
+            \\
+            W_{1j} & = w_i^*/ \sqrt{\norm{w_i^*}}, \quad w_{2j} = -\sqrt{\norm{w_i^*}}.
+        \end{aligned}
+    \end{equation*}
+
+    \begin{itemize}
+        \item Optimal solution balances weight between layers.
+    \end{itemize}
+
+    \horizontalrule
+
+    Given \( (W^*_{1i}, w^*_{2i}) \), an optimal convex ReLU model is
+
+    \begin{equation*}
+        \textbf{NC to C:} \quad \quad
+        \begin{aligned}
+            v_i & = W^*_{1i} \abs{w_{2i}}^* \quad \text{ if } w^*_{2i} \geq 0 \\
+            w_i & = W^*_{1i} \abs{w_{2i}}^* \quad \text{ Otherwise.}
+        \end{aligned}
+    \end{equation*}
+
+    \begin{itemize}
+        \item Optimal solution combines weight from both layers.
+    \end{itemize}
+
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Gated ReLU Networks and Cone Decompositions
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Bonus: Gated ReLU Networks}
+
+    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{result}
+        \textbf{Theorem 2.2} (informal): C-GReLU is equivalent to solving
+        \[
+            \textbf{NC-GReLU}: \min_{W_1, \alpha} \half \norm{\sum_{j=1}^p \phi_{g_j}(X, w_{j})\alpha - y}_2^2 + \frac{\lambda}{2} \sum_{j=1}^p \norm{w_{j}}_2^2 + |\alpha_j|^2,
+        \]
+        with the ``Gated ReLU'' \citep{fiat2019decoupling} activation function
+        \[ \phi_{g}(X, u) = \text{diag}(\mathbbm{1}(Xg \geq 0)) X u, \]
+        and gate vectors \( g_j \) such that
+        \[
+            D_j = \text{diag}[\mathbbm{1}(X g_j \geq 0).
+        \]
+    \end{beamercolorbox}
+    \pause
+
+    \textbf{Interpretation}: if \( u_j \not \in \calK_j \), then the activation
+    must be decoupled from the linear mapping in the non-convex model.
+
+\end{frame}
+
+\begin{frame}{Bonus: Cone Decompositions}
+
+    \begin{center}
+        \textbf{Question}: when are Gated ReLU and ReLU networks equivalent?
+    \end{center}
+
+    \pause
+    \horizontalrule
+
+    Consider special case where \( \lambda = 0 \).
+
+    \[
+        \textbf{C-GReLU}: \min_{u} \norm{\sum_{j=1}^p D_j X u_j - y}_2^2. \hspace{11em}
+    \]
+    \vspace{-1em}
+
+    \begin{center}
+        \Large \red{V.S.}
+    \end{center}
+
+    \vspace{-2em}
+    \[
+        \begin{aligned}
+            \textbf{C-ReLU}: \min_{u} & \norm{\sum_{j=1}^p D_j X (v_j - w_j) - y}_2^2. \\
+                                      & \hspace{0.2em} \text{s.t. }
+            v_j, w_j \in \calK_j := \cbr{w : (2D_j - I) X w \geq 0},
+        \end{aligned}
+    \]
+
+\end{frame}
+
+\begin{frame}{Bonus: Equivalent Statement}
+
+    \red{Equiv. Question}: when does \( u_j = v_j - w_j \) for some \( v_j, w_j \in \calK_j \)?
+
+    \pause
+    \vspace{1em}
+
+    \green{Answer}: when \( \calK_j - \calK_j = \R^d \) and a ``cone decomposition'' exists.
+    \pause
+
+    \begin{figure}[]
+        \centering
+        \input{assets/cone_decomp}
+    \end{figure}
+
+\end{frame}
+
+\begin{frame}{Bonus: Basic Cone Decomposition}
+
+    \textbf{Recall}: \( \calK_j = \cbr{w : (2 D_j - I) X w \geq 0} \).
+    \pause
+
+    \begin{itemize}
+        \item This is a polyhedral cone which we rewrite as
+              \[
+                  \calK_j = \bigcap_{i=1}^n \cbr{w : [S_j]_{ii} \cdot \abr{x_i, w} \geq 0},
+              \]
+              where \( S_j = (2D_j - I) \).
+    \end{itemize}
+
+    \pause
+    \horizontalrule
+
+    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{result}
+        \textbf{Proposition 3.1} (informal): If \( X \) is full row-rank,
+        then \( \text{aff}(\calK_j) = \R^d \) and
+        \( \calK_j - \calK_j = \R^d \).
+    \end{beamercolorbox}
+
+    \vspace{1em}
+
+    \pause
+    Unfortunately, there is no extension to full-rank \( X \).
+
+\end{frame}
+
+\begin{frame}{Bonus: Not All Cones are Equal}
+
+    \textbf{Alternative Idea}: show we don't need ``singular'' cones \( \calK_j \),
+    \[
+        \calK_j - \calK_j \subsetneq \R^d.
+    \]
+
+    \vspace{1em}
+    \pause
+
+    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{result}
+        \textbf{Proposition 3.2} (informal): Suppose \( \calK_j - \calK_j \subset \R^d \).
+        Then, there exists \( \calK_i \) for which \( \calK_i - \calK_i = \R^d \)
+        and \( \calK_j \subset \calK_i \).
+    \end{beamercolorbox}
+
+    \pause
+    \vspace{1em}
+
+    \textbf{Interpretation}: if optimal \( u^*_j \neq 0 \), then set
+    \[
+        u_i' = u_j^* + u_i^*.
+    \]
+    It is possible to show this causes no problems.
+
+\end{frame}
+
+\begin{frame}{Bonus: Cone Decomposition Proof Sketch}
+
+    \textbf{Proof}: Works by iteratively constructing \( \calK_i \) s.t. \( \calK_j \subset \calK_i \).
+
+    \pause
+    \horizontalrule
+
+    We sketch a simpler statement:
+
+    \vspace{1em}
+
+    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{relaxation}
+        \textbf{Proposition 3.2} (informal): Suppose \( \calK_j = \cbr{0} \).
+        Then, there exists \( \calK_i \) for which \( \calK_i - \calK_i = \R^d \)
+        and \( \calK_j \subset \calK_i \).
+    \end{beamercolorbox}
+
+\end{frame}
+
+\begin{frame}{Bonus: Cone Decomposition Proof Sketch}
+    \[
+        \calK_j' = \cbr{w : [S_j]_{11} \cdot \abr{x_1, w} \geq 0}
+    \]
+    \begin{figure}[]
+        \centering
+        \input{assets/empty_cone_1}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Cone Decompositions: Proof Sketch}
+
+    \[
+        \calK_j'' = \calK_j' \cap \cbr{w : [S_j]_{22} \cdot \abr{x_2, w} \geq 0}
+    \]
+
+    \begin{figure}[]
+        \centering
+        \input{assets/empty_cone_2}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Bonus: Cone Decomposition Proof Sketch}
+
+    \[
+        \calK_j''' = \calK_j'' \cap \cbr{w : [S_j]_{33} \cdot \abr{x_3, w} \geq 0}
+    \]
+
+    \begin{figure}[]
+        \centering
+        \input{assets/empty_cone_3}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Bonus: Cone Decomposition Proof Sketch}
+
+    \[
+        \tilde \calK_j''' = \calK_j'' \cap \cbr{w : -[S_j]_{33} \cdot \abr{x_3, w} \geq 0}
+    \]
+
+    \begin{figure}[]
+        \centering
+        \input{assets/empty_cone_4}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Bonus: Main Cone Decomposition Result}
+    \begin{itemize}
+        \item The real proof is more complex, but this is the core idea.
+              \vspace{0.2em}
+              \begin{itemize}
+                  \item Build \( \calK_i \) by switching signs of \( [S_j]_{ii} \).
+                        \vspace{0.2em}
+                  \item Equivalent to turning on/off activations.
+              \end{itemize}
+              \vspace{0.4em}
+
+        \item Leads to our main approximation result.
+    \end{itemize}
+
+    \pause
+    \horizontalrule
+
+    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{result}
+        \textbf{Theorem 3.7} (informal):
+        Let \( \lambda \geq 0 \) and let \( p^* \) be the optimal value of the ReLU problem.
+        There exists a C-GReLU problem with minimizer \( u^* \) and optimal value \( d^* \) satisfying,
+        \[
+            d^* \leq p^* \leq d^* + \textcolor{Red}{2 \lambda \kappa(\tilde X_{\calJ}) \sum_{D_i \in \tilde \calD} \norm{u_i^*}_2}.
+        \]
+    \end{beamercolorbox}
+
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Details on Optimization Algorithms
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Bonus: ReLU by Cone Decomposition}
+    \begin{enumerate}
+        \item Solve the gated ReLU problem:
+              \[
+                  u^* \in \argmin_{u} \norm{\sum_{j=1}^p D_j X u_j - y}_2^2 + \lambda \sum_{j=1}^p \norm{u_j}_2
+              \]
+              \pause
+        \item Solve a cone decomposition:
+              \[
+                  v_j^*, w_j^* \in \argmin_{v_j, w_j} \cbr{ L(v_j, w_j) : v_j - w_j = u^*_j},
+              \]
+              where \( L \) is a loss function.
+              \pause
+
+        \item Compute corresponding ReLU model.
+    \end{enumerate}
+
+    \pause
+
+    \vspace{2ex}
+    \textbf{Choosing}:
+    \begin{itemize}
+        \item \( L(v, w) = \norm{v}_2 + \norm{w}_2 \) gives an SOCP.
+              \pause
+
+        \item \( L(v, w) = 0 \) yields a linear feasibility problem.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bonus: R-FISTA}
+
+    Consider ``composite'' optimization problem:
+    \[
+        \min_{x} f(x) + g(x),
+    \]
+    where \( f \) is \( L \)-smooth and \( g \) is convex.
+    Smoothness implies
+    \begin{equation*}
+        \begin{aligned}
+            f(y) & \leq Q_{\xk, 1/L}(y)                           \\
+                 & = f(\xk)\! + \!\abr{\grad(\xk), y \!- \!\xk}\!
+            +\! \frac{L}{2}\norm{y \!- \!\xk}_2^2.
+        \end{aligned}
+    \end{equation*}
+    \vspace{2ex}
+
+    \pause
+
+    The \textbf{FISTA} algorithm minimizes \( Q_{\yk, \etak} \)
+    and handles \( g \) exactly:
+    \begin{align*}
+        \xkk
+         & = \argmin_{y} Q_{\yk, \etak}(y) + g(y)              \\
+        \ykk
+         & = \xkk + \frac{t_k - 1}{t_{k + 1}} \rbr{\xkk - \xk}
+    \end{align*}
+    where \( t_{k + 1} = (1 + \sqrt{1 + 4 t_k^2}) / 2 \).
+\end{frame}
+
+\begin{frame}{Bonus: R-FISTA Continued}
+    We combine this with line-search and restarts:
+    \vspace{1ex}
+
+    \pause
+    \begin{itemize}
+        \item
+              \textbf{Line-search}: backtrack on \( \etak \) until:
+              \[
+                  f(\xkk(\etak)) \leq Q_{\yk, \etak}(\xkk(\etak)),
+              \]
+              as proposed by \citep{beck2009fast}.
+              \pause
+              \vspace{1ex}
+        \item
+              \textbf{Restarts}: reset to \( \yk = \xk \) if
+              \[ \abr{\xkk - \xk, \xkk - \yk} > 0, \]
+              that is, \( \xkk \) is not a descent step
+              with respect to proximal-gradient mapping
+              ~\citep{odonoghue2015restarts}.
+
+              \pause
+              \vspace{1ex}
+        \item And lots of other \textbf{convex tricks}...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bonus: AL Method}
+    Let \( \tilde X_i = (2 D_i - I) X \) so that
+    \( v_j \in \calK_j \iff X_j v_j \geq 0 \) and define
+    \[
+        F(v, w) 
+        = \norm{\sum_{j=1}^p D_j X (v_j - w_j) - y}_2^2 
+        + \lambda \sum_{j=1}^p \norm{v_j}_2 + \norm{w_j}_2.
+    \]
+    Now we can form the augmented Lagrangian:
+    \begin{equation}\label{eq:augmented-lagrangian}
+        \begin{aligned}
+            \!\!\!\!\calL_\delta & (v,\!w,\!\gamma,\!\zeta)\!:=\!(\delta / 2)\!\!\sum_{D_i \in \tilde \calD}\!\!\big[\|(\gamma_i / \delta\!-\! \tilde X_i v_i)_+\|_2^2 \\
+                                 & \hspace{2em} + \|(\zeta_i / \delta - \tilde X_i w_i)_+\|_2^2 \big] + F(v,w).
+        \end{aligned}
+    \end{equation}
+    We use the multiplier method to update the dual parameters:
+    \begin{align*}
+        \rbr{v_{k+1}, w_{k+1}}
+                    & = \argmin_{v, w} \calL_{\delta}(v, w, \gamma_k, \zeta_k), \label{eq:al-subroutine} \\
+        \gamma_{k + 1}
+        = (\gamma_k & - \delta \tilde X_i v_i)_+, \quad
+        \zeta_{k + 1} = (\zeta_k - \delta \tilde X_i w_i)_+. \nonumber
+    \end{align*}
+
+    \pause
+    We use warm starts and propose a heuristic for \( \delta \).
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Additional Optimization Experiments
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Bonus: Sub-sampling Patterns}
+
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=0.6\textwidth]{assets/hp_paper.png}
+    \end{figure}
+    \begin{itemize}
+        \item Variance induced by resampling \( \tilde \calD \) is minimal.
+        \item Standard bias-variance trade-off.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Bonus: Generalization Performance}
+
+    Generalization performance is equivalent to non-convex solvers.
+    \input{assets/non_convex_table.tex}
+
+\end{frame}
+
+\begin{frame}{Bonus: Comparison to Standard Baselines}
+    \input{assets/binary_accuracy_table.tex}
+\end{frame}
+
+\begin{frame}{Bonus: Acceleration Ablation}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.75\textwidth]{assets/pp_acceleration.pdf}
+    \end{figure}
+\end{frame}
+

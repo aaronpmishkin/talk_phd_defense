@@ -1,0 +1,44 @@
+%% Simple Beamer Style
+%% Maintainer: Aaron Mishkin <amishkin@cs.stanford.edu>
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[scale=2]{ccicons}
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage[toc,page]{appendix}
+\usepackage{graphicx}
+\usepackage{xspace}
+\usepackage{adjustbox, lipsum}
+\usepackage{bbm}
+\usepackage{xfrac}
+
+%% bib management
+\RequirePackage[backend=biber, style=alphabetic, natbib=true]{biblatex}
+
+% src: http://codydunne.blogspot.com/2012/01/suppressing-bibtex-fields-for-specific.html 
+
+\AtEveryBibitem{
+	\clearfield{isbn}
+	\clearfield{issn}
+	\clearfield{url}
+	\clearfield{doi}
+	\ifentrytype{book}{}{% Remove publisher and editor except for books
+		\clearlist{publisher}
+		\clearname{editor}
+	}
+}
+
+% algorithm environments
+%\usepackage[ruled, vlined]{algorithm2e} % algorithm environments
+
+% absolute positioning
+\usepackage[absolute,overlay]{textpos}
+
+%% source for images.
+\newcommand{\source}[1]{{\let\thefootnote\relax\footnote{{\tiny #1}}}}
+
+\pdfstringdefDisableCommands{%
+\def\\{}%
+\def\texttt#1{<#1>}%
+}

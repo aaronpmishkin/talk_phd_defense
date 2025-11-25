@@ -1,0 +1,44 @@
+%! TEX root = ../../main.tex
+
+%% Illustration of cone decomposition. 
+
+\begin{tikzpicture}[scale=1,
+		declare function={
+				cone_1(\x)= \x;
+				cone_2(\x)= -\x;
+				cone_3(\x)= -4*\x;
+				bounds(\x)= \x - 10;
+			}
+	]
+	\begin{axis}[width=\linewidth, height=8cm,
+			axis lines=center, yticklabels={,,}, xticklabels={,,},
+			ymin=-4, ymax=4, ytick={-5,...,5}, ylabel=$$, x axis line style={-},
+				xmin=-6, xmax=6, xtick={-5,...,5}, xlabel=$$, y axis line style={-},
+		]
+		\addplot[name path=cone_1, domain=-6:6, samples=100, line width=1pt]{cone_1(x)};
+		%\addplot[name path=cone_2, domain=-6:6, samples=200, line width=1pt]{cone_2(x)};
+		%\addplot[name path=cone_3, domain=-6:6, samples=200, line width=1pt]{cone_3(x)};
+		\addplot[name path=bounds, domain=-6:6, samples=100, line width=1pt]{bounds(x)};
+
+		% add color fill to both cones.
+
+		\addplot fill between[
+				of = cone_1 and bounds,
+				%split, % calculate segment
+				every even segment/.style = {fill=teal, fill opacity=0.3},
+			];
+
+		%% point labels
+		% origin point
+		\node[circle, fill, inner sep=1pt] at (axis cs:0,0) {};
+
+		% labels
+		\node[label={0:$\calK_j$}] at (axis cs:4,-1) {};
+
+		% lines
+        \draw [->, draw=red, line width = 0.4mm] (axis cs:2,2) -- (axis cs:3,1) node[midway,above right] {$S_{11} \cdot x_1$};
+		%\draw [->, draw=red, line width = 0.4mm] (axis cs:2,-2) -- (axis cs:3,-1) node[midway,below right] {$S_{22} \cdot x_2$};
+		%\draw [->, draw=red, line width = 0.4mm] (axis cs:0.5,-2) -- (axis cs:-2.5,-2.75) node[pos=0.9,below right] {$S_{33} \cdot x_3$};
+	\end{axis}
+
+\end{tikzpicture}%

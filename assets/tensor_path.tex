@@ -1,0 +1,106 @@
+\begin{tikzpicture}[scale=1,
+    ]
+    \begin{axis}[width=1.1\textwidth, height=8cm,
+            axis lines=none,  % don't print axis lines
+            yticklabels={,,}, xticklabels={,,},
+            ymin=0, ymax=8, y axis line style={-},
+            xmin=0, xmax=15, x axis line style={-},
+        ]
+        %\node [] (input) at (axis cs:1,4) {$X$};
+        \node [Input] (input1) at (axis cs:2,2) {$x_3$};
+        \node [Input] (input2) at (axis cs:2,4) {$x_2$};
+        \node [Input] (input3) at (axis cs:2,6) {$x_1$};
+
+        %\draw [decorate, line width = 0.6mm,
+        %    decoration = {calligraphic brace}] (axis cs:2,1.5) --  (axis cs:2,6.5);
+
+        \node [Hidden] (hidden11) at (axis cs:5,1.5) {};
+        \node [Hidden] (hidden12) at (axis cs:5,3.16) {};
+        \node [Hidden] (hidden13) at (axis cs:5,4.72) {};
+        \node [Hidden] (hidden14) at (axis cs:5,6.5) {};
+
+        \node [Hidden] (hidden21) at (axis cs:8,1) {};
+        \node [Hidden] (hidden22) at (axis cs:8,2.5) {};
+        \node [Hidden] (hidden23) at (axis cs:8,4) {};
+        \node [Hidden] (hidden24) at (axis cs:8,5.5) {};
+        \node [Hidden] (hidden25) at (axis cs:8,7) {};
+
+        \node [Hidden] (hidden31) at (axis cs:11,2) {};
+        \node [Hidden] (hidden32) at (axis cs:11,4) {};
+        \node [Hidden] (hidden33) at (axis cs:11,6) {};
+
+        \node [Output] (output) at (axis cs:14,4) {$\hat y$};
+
+        % Layer 1
+
+        \draw [->, style=arrow, draw=black] (input1) -- (hidden11);
+        \draw [->, style=arrow, draw=black] (input2) -- (hidden11);
+        \draw [->, style=arrow, draw=black] (input3) -- (hidden11);
+
+        \draw [->, style=arrow, draw=black] (input1) -- (hidden12);
+        \draw [->, style=arrow, draw=black] (input2) -- (hidden12);
+        \draw [->, style=arrow, draw=red, line width = 0.75mm] (input3) -- (hidden12);
+
+        \draw [->, style=arrow, draw=black] (input1) -- (hidden13);
+        \draw [->, style=arrow, draw=black] (input2) -- (hidden13);
+        \draw [->, style=arrow, draw=black] (input3) -- (hidden13);
+
+        \draw [->, style=arrow, draw=black] (input1) -- (hidden14);
+        \draw [->, style=arrow, draw=black] (input2) -- (hidden14);
+        \draw [->, style=arrow, draw=black] (input3) -- (hidden14);
+
+        % Layer 2
+
+        \draw [->, style=arrow, draw=black] (hidden11) -- (hidden21);
+        \draw [->, style=arrow, draw=black] (hidden12) -- (hidden21);
+        \draw [->, style=arrow, draw=black] (hidden13) -- (hidden21);
+        \draw [->, style=arrow, draw=black] (hidden14) -- (hidden21);
+
+        \draw [->, style=arrow, draw=black] (hidden11) -- (hidden22);
+        \draw [->, style=arrow, draw=red, line width = 0.75mm] (hidden12) -- (hidden22);
+        \draw [->, style=arrow, draw=black] (hidden13) -- (hidden22);
+        \draw [->, style=arrow, draw=black] (hidden14) -- (hidden22);
+
+        \draw [->, style=arrow, draw=black] (hidden11) -- (hidden23);
+        \draw [->, style=arrow, draw=black] (hidden12) -- (hidden23);
+        \draw [->, style=arrow, draw=black] (hidden13) -- (hidden23);
+        \draw [->, style=arrow, draw=black] (hidden14) -- (hidden23);
+
+        \draw [->, style=arrow, draw=black] (hidden11) -- (hidden24);
+        \draw [->, style=arrow, draw=black] (hidden12) -- (hidden24);
+        \draw [->, style=arrow, draw=black] (hidden13) -- (hidden24);
+        \draw [->, style=arrow, draw=black] (hidden14) -- (hidden24);
+
+        \draw [->, style=arrow, draw=black] (hidden11) -- (hidden25);
+        \draw [->, style=arrow, draw=black] (hidden12) -- (hidden25);
+        \draw [->, style=arrow, draw=black] (hidden13) -- (hidden25);
+        \draw [->, style=arrow, draw=black] (hidden14) -- (hidden25);
+
+        % Layer 3
+
+        \draw [->, style=arrow, draw=black] (hidden21) -- (hidden31);
+        \draw [->, style=arrow, draw=black] (hidden22) -- (hidden31);
+        \draw [->, style=arrow, draw=black] (hidden23) -- (hidden31);
+        \draw [->, style=arrow, draw=black] (hidden24) -- (hidden31);
+        \draw [->, style=arrow, draw=black] (hidden25) -- (hidden31);
+
+        \draw [->, style=arrow, draw=black] (hidden21) -- (hidden32);
+        \draw [->, style=arrow, draw=black] (hidden22) -- (hidden32);
+        \draw [->, style=arrow, draw=black] (hidden23) -- (hidden32);
+        \draw [->, style=arrow, draw=black] (hidden24) -- (hidden32);
+        \draw [->, style=arrow, draw=black] (hidden25) -- (hidden32);
+
+        \draw [->, style=arrow, draw=black] (hidden21) -- (hidden33);
+        \draw [->, style=arrow, draw=red, line width = 0.75mm] (hidden22) -- (hidden33);
+        \draw [->, style=arrow, draw=black] (hidden23) -- (hidden33);
+        \draw [->, style=arrow, draw=black] (hidden24) -- (hidden33);
+        \draw [->, style=arrow, draw=black] (hidden25) -- (hidden33);
+
+        \draw [->, style=arrow, draw=black] (hidden31) -- (output);
+        \draw [->, style=arrow, draw=black] (hidden32) -- (output);
+        \draw [->, style=arrow, draw=red, line width = 0.75mm] (hidden33) -- (output) node[pos=0.4,right] {\hspace{0.2ex} $T_{i_0, i_1, \ldots, i_k}$};
+
+        %\draw [->, style=arrow, draw=black] (hidden4) -- (output) node[pos=0.5,above] {$w_{2j}$};
+    \end{axis}
+
+\end{tikzpicture}%

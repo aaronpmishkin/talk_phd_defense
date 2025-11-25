@@ -1,0 +1,32 @@
+\setlength{\tabcolsep}{3pt} % Default value: 6pt
+\begin{table}[t]
+    \centering
+    \begin{small}
+        \begin{tabular}{lccccc} \toprule
+            \small
+            \textbf{Dataset} & \textbf{C-GReLU} & \textbf{C-ReLU} & \textbf{RF}   & \textbf{Linear} & \textbf{RBF}  \\ \midrule
+            blood            & 79.9             & \textbf{80.5}   & 75.8          & 74.5            & 77.9          \\
+            chess-krvkp      & \textbf{99.2}    & 98.6            & 98.9          & 97.2            & 98.4          \\
+            conn-bench       & \textbf{90.2}    & 85.4            & 73.2          & 68.3            & 85.4          \\
+            cylinder-bands   & 76.5             & \textbf{78.4}   & 77.5          & 71.6            & 71.6          \\
+            fertility        & \textbf{80.0}    & \textbf{80.0}   & 75.0          & 75.0            & 75.0          \\
+            heart-hung.      & \textbf{86.2}    & \textbf{86.2}   & 84.5          & 84.5            & \textbf{86.2} \\
+            hill-valley      & \textbf{76.0}    & 68.6            & 57.9          & 62.0            & 70.2          \\
+            ilpd-liver       & 72.4             & \textbf{74.1}   & 66.4          & 71.6            & 71.6          \\
+            mammographic     & 77.6             & 78.6            & \textbf{80.7} & \textbf{80.7}   & 80.2          \\
+            monks-1          & \textbf{100}     & \textbf{100}    & 95.8          & 79.2            & 83.3          \\
+            musk-1           & 94.7             & \textbf{95.8}   & 92.6          & 86.3            & \textbf{95.8} \\
+            ozone            & \textbf{97.6}    & \textbf{97.6}   & 97.4          & 97.2            & 97.4          \\
+            pima             & 74.5             & 74.5            & \textbf{76.5} & 75.2            & 73.2          \\
+            planning         & \textbf{69.4}    & 63.9            & 66.7          & 66.7            & \textbf{69.4} \\
+            spambase         & 93.5             & 93.6            & \textbf{94.1} & 92.2            & 93.6          \\
+            spectf           & \textbf{87.5}    & 75.0            & 68.8          & 68.8            & 68.8          \\
+            statlog-german   & 74.0             & \textbf{77.5}   & 73.5          & 75.0            & 75.5          \\
+            tic-tac-toe      & 99.0             & 99.0            & 99.5          & 98.4            & \textbf{100}  \\ \bottomrule
+        \end{tabular}
+    \end{small}
+\end{table}
+\setlength{\tabcolsep}{6pt}
+
+% convex is best or ties on 24 & 38 datasets. Next best is the kernel SVM with 12 & 38 datasets.
+

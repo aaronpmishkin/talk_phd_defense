@@ -1,0 +1,586 @@
+%!TEX root = ../main.tex
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Example: Discontinuous Regularization Paths
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Example: Discontinuous Paths}
+    Consider training a toy neural network: given \( (x_1, y_1), (x_2, y_2) \),
+    \pause
+    \[
+        \min_{w_1} \, \half ((w_1 x_1)_+ - y_1)^2 + \half ((w_1 x_2)_+ - y_2)^2 + \lambda |w_1|.
+    \]
+    \pause
+
+    \begin{center}
+        \input{assets/discontinuous_network_init}
+    \end{center}
+
+    \begin{center}
+        \Large
+        \textcolor{white}{Goal: Overcome these problems via convexification..}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}{Example: Discontinuous Paths}
+    Consider training a toy ReLU network:
+    \[
+        \min_{w_1} \, \half ((w_1 x_1)_+ - y_1)^2 + \half ((w_1 x_2)_+ - y_2)^2 + \lambda |w_1|.
+    \]
+
+    \begin{center}
+        \input{assets/discontinuous_network_0}
+    \end{center}
+
+    \begin{center}
+        \Large
+        \textcolor{white}{Goal: Overcome these problems via convexification..}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}{Example: Discontinuous Paths}
+    Consider training a toy neural network:
+    \[
+        \min_{w_1} \, \half ((w_1 x_1)_+ - y_1)^2 + \half ((w_1 x_2)_+ - y_2)^2 + \lambda |w_1|.
+    \]
+
+    \begin{center}
+        \input{assets/discontinuous_network_1}
+    \end{center}
+
+    \begin{center}
+        \Large
+        \textcolor{white}{Goal: Overcome these problems via convexification..}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}{Example: Discontinuous Paths}
+    Consider training a toy neural network:
+    \[
+        \min_{w_1} \, \half ((w_1 x_1)_+ - y_1)^2 + \half ((w_1 x_2)_+ - y_2)^2 + \lambda |w_1|.
+    \]
+
+    \begin{center}
+        \input{assets/discontinuous_network_2}
+    \end{center}
+
+    \pause
+
+    \begin{center}
+        \Large
+        \good{Goal}: Overcome these problems via convexification.
+    \end{center}
+
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Optimal Sets
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Bonus: C-ReLU Optimality Conditions}
+
+    We form the Lagrangian for the convex reformulation:
+
+    \begin{equation*}
+        \begin{aligned}
+            \calL(v, w, \rho^{+}, \rho^{-})
+             & = \half \norm{\sum_{D_i \in \tilde \calD} D_i X (v_i - w_i) - y}_2^2
+            + \lambda\sum_{D_i \in \tilde \calD}\norm{v_i}_2 + \norm{w_i}_2                  \\
+             & \quad \quad - \sum_{D_i \tilde \calD} \sbr{\abr{\tilde{X_i}^\top \rho^{-}, w}
+                - \abr{\tilde{X_i}^\top \rho^{+}, v}},
+        \end{aligned}
+    \end{equation*}
+
+    where \( \tilde X_{i} = (2D_i - I) \).
+
+    \pause
+    \horizontalrule
+
+    The \good{KKT conditions} are necessary and sufficient for optimality:\pause
+
+    \vspace{1ex}
+    \begin{itemize}
+        \item Stationary Lagrangian:
+              \[
+                  \underbrace{X^\top D_i (\hat y - y) - \tilde{X_i}^\top \ri^{+}}_{q_i^+} \in \partial \lambda \norm{v_i}_2.
+              \]
+              \pause
+              \begin{itemize}
+                  \normalsize
+                  \item It turns out each \( q_i^+ \) is \textbf{unique} WLOG!
+              \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bonus: Characterizing the Optimal Set}
+
+    \textbf{Facts}: let \( (\theta, \rho) \) be primal dual optimal. \pause
+    \begin{itemize}
+        \item Model fit \( \hat y \) is \blue{constant} over optimal set \( \solfn(\lambda) \). \pause
+        \item Implies correlation \( X^\top D_i (y - \hat y) \) is \blue{constant} over \( \solfn(\lambda) \). \pause
+        \item We may assume \( \rho \) is \blue{unique} (e.g. min-norm dual solution).
+    \end{itemize}
+
+    \pause
+    \horizontalrule
+
+    \textbf{Non-zero Blocks}:
+    \begin{itemize}
+        \item Suppose \( \theta_i \neq 0 \).
+              \pause
+        \item Then \( \nabla \norm{\theta_i}_2 = s_\bi = \lambda \theta_i / \norm{\theta_i}_2 \).
+              \pause
+        \item Rearranging stationarity implies \( \exists \alpha_\bi > 0 \):
+              \[
+                  \theta_i = \blue{\alpha_\bi} \underbrace{\sbr{X^\top D_i (y - \hat y) - \tilde X_i \ri}}_{q_i}.
+              \]
+              \pause
+        \item Every solution is a non-negative multiple of these \( q_i \) vectors.
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Bonus: Explicit Optimal Set}
+    We gave a characterization of \( \solfn(\lambda) \) that depends on
+    \[
+        \calS_\lambda
+        = \cbr{\bi \in [2p] : \exists \theta \in \solfn(\lambda), \
+            \theta_i \neq 0}.
+    \]
+
+    Alternative expression involves additional linear constraints.
+
+    \pause
+    \horizontalrule
+
+    \begin{equation*}
+        \begin{aligned}
+            \solfn(\lambda) =
+            \big\{ & \theta  :
+            \forall \, \bi  \in  \equi,
+            \theta_i =  \alpha_\bi q_i, \alpha_\bi \geq 0, \,           \\
+                   & \quad \forall \, j \in [2p] \setminus \equi,
+            \theta_{j} = 0, \, \sum_{i=1}^{2p} D_i X \theta_i = \hat y, \\
+                   & \quad \forall \, i \in [2p],
+            \tilde X_i \theta_i \geq 0, \abr{\rho, \tilde X_i \theta_i } = 0.
+            \big\}
+        \end{aligned}
+    \end{equation*}
+
+    \pause
+
+    More complex, but also \textbf{explicit}.
+
+\end{frame}
+
+\begin{frame}{Bonus: Solution Mapping for C-ReLU}
+
+    Given \( \rbr{v^*, w^*} \), an optimal non-convex ReLU network is given by
+
+    \begin{equation*}
+        \textbf{C to NC:} \quad \quad
+        \begin{aligned}
+            W_{1i} & = v_i^*/ \sqrt{\norm{v_i^*}}, \quad w_{2i} = \sqrt{\norm{v_i^*}}
+            \\
+            W_{1j} & = w_i^*/ \sqrt{\norm{w_i^*}}, \quad w_{2j} = -\sqrt{\norm{w_i^*}}.
+        \end{aligned}
+    \end{equation*}
+
+    \pause
+    \vspace{3ex}
+    \begin{itemize}
+        \item Optimal convex weights satisfy \( v_i^* = \alpha_i q_i \)
+              so that
+              \[
+                  \norm{v_i^*}_2 = \alpha_i \norm{q_i}_2 = \alpha_i \lambda.
+              \]
+    \end{itemize}
+
+    \pause
+    \horizontalrule
+
+    Recall structure of \textbf{non-convex optima}:
+
+    \begin{equation*}
+        \begin{aligned}
+            \hspace{-0.5em} \calO_\lambda  = \,
+            \big\{
+             & (W_1,  w_2) :
+            \, f_{W_1, w_2}(X)  =  \hat y,                       \\
+             & \forall \, \bi  \in  \calS_\lambda,
+            W_{1i} = (\sfrac{\alpha_{i}}{\lambda})^{\sfrac{1}{2}} q_i,
+            w_{2i} = (\alpha_i \lambda)^{\sfrac{1}{2}},
+            \alpha_i \geq 0                                      \\
+             & \forall \, \bi  \in [2p] \setminus \calS_\lambda,
+            W_{1i} = 0, \, w_{2i} = 0
+            \big\}.
+        \end{aligned}
+    \end{equation*}
+
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Optimal Pruning
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Optimal Pruning: the Polytope of Solutions}
+
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+
+            \begin{equation*}
+                \begin{aligned}
+                     & \solfn(\lambda) =
+                    \big\{ \theta  : \sum_{i=1}^{2p} D_i X \theta_i = \hat y,      \\
+                     & \hspace{5em} \forall \, \bi  \in  \calS_\lambda,
+                    \theta_i =  \alpha_\bi q_i, \alpha_\bi \geq 0, \,              \\
+                     & \hspace{5em} \forall \, j \in [2p] \setminus \calS_\lambda,
+                    \theta_{j} = 0
+                    \big\}
+                \end{aligned}
+            \end{equation*}
+
+            \pause
+            The C-ReLU optimal set is a \good{convex polytope}!
+
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \pause
+            \begin{figure}[c]
+                \centering
+                \includegraphics[width=0.8\textwidth]{assets/polytope.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}{Optimal Pruning: Vertices}
+
+    \begin{enumerate}
+        \item
+              Stack the \( q_i \) vectors into a matrix \( Q =
+              \begin{bmatrix}
+                  \vert &        & \vert  \\
+                  q_1   & \cdots & q_{2p} \\
+                  \vert &        & \vert  \\
+              \end{bmatrix}.
+              \)
+
+              \pause
+        \item
+              The C-ReLU Optimal Set in \( \alpha \) space is then,
+              \begin{equation}
+                  \begin{aligned}
+                      \solfn(\lambda) & =
+                      Q_{\calS_\lambda} \big\{ \alpha \succeq 0  :
+                      \sum_{i \in \calS_\lambda} (D_i X q_i) \alpha_i = \hat y,
+                      \big\}                                                       \\
+                                      & = Q_{\calS_\lambda} \calP_{\calS_\lambda}.
+                  \end{aligned}
+              \end{equation}
+
+              \pause
+
+        \item \( \bar \alpha \in \calP_{\calS_\lambda} \) is a \good{vertex}
+              iff \( \cbr{D_i X q_i}_{\bar \alpha_i \neq 0} \) are linearly independent.
+    \end{enumerate}
+
+    \pause
+    \horizontalrule
+
+    {\large Are these vertices \good{special} in some way?}
+
+\end{frame}
+
+\begin{frame}{Optimal Pruning: Minimal Models}
+    \textbf{Definition}: An optimal C-ReLU model \( \theta^* \) is minimal if
+    there does not exist another optimal model \( \theta' \) with \bad{strictly
+        smaller support}.
+
+    \pause
+    \begin{itemize}
+        \item \bad{NC-ReLU}: minimal \( \iff \) \good{sparsest} (neuron-wise) model.
+    \end{itemize}
+
+    \vspace{3ex}
+    \pause
+
+    \begin{beamercolorbox}[wd=\textwidth,sep=1em]{result}
+        \textbf{Proposition 3.2} (informal):
+        For \( \lambda > 0 \), \( \theta \in \solfn(\lambda) \) is \good{minimal}
+        iff
+        the vectors \( \cbr{D_i X q_i}_{\alpha_i \neq 0} \)
+        are linearly independent.
+    \end{beamercolorbox}
+
+    \pause
+
+    \begin{itemize}
+        \item \bad{NC-ReLU}: minimal if \( (X W_{1i})_+ \) are linearly independent.
+    \end{itemize}
+
+    \vspace{1ex}
+    \pause
+
+    \textbf{Our Results}:
+    \begin{enumerate}
+        \item We prove vertices of \( \solfn(\lambda) \) are minimal models.
+              \pause
+        \item There are at most \( n \) neurons in a minimal model.
+              \pause
+        \item We give a poly-time algorithm for computing minimal models
+              starting from any model \( \theta \).
+    \end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Bonus: Optimal Pruning Pseudo-code}
+    \begin{algorithm}[H]
+        \caption{Pruning solutions}
+        \begin{algorithmic}
+            \STATE {\bfseries Input:} data matrix \( X \), solution \( \theta \).
+            \STATE \( k \gets 0 \).
+            \STATE \( \theta^k \gets \theta \).
+            \WHILE {\( \exists \beta \neq 0 \) s.t. \( \sum_{\bi \in \act(\theta^k)} \beta_\bi D_i X \theta_i^k = 0 \)}
+            \STATE \( \bi^k \gets \argmax_{\bi} \cbr{|\beta_\bi| : \bi \in \act(\theta^k)}  \)
+            \STATE \( t^k \gets 1/|\beta_{\bi^k}| \)
+            \STATE \( \theta^{k+1} \gets \theta^k (1 - t^k \beta_\bi) \)
+            \STATE \( k \gets k + 1 \)
+            \ENDWHILE
+            \STATE {\bfseries Output:} final weights \( \theta^k \)
+        \end{algorithmic}
+    \end{algorithm}
+
+    \pause
+
+    Let \( r = \text{rank}(X) \). Complexity to compute a minimal model:
+
+    \[ O\rbr{d^3 r^3 (\frac{n}{r})^{3r} + \blue{(n^3 + nd) r (\frac{n}{r})^r}}. \]
+
+\end{frame}
+
+\begin{frame}{Bonus: Complexity of Pruning}
+
+    \begin{algorithm}[H]
+        \caption{Pruning solutions}
+        \begin{algorithmic}
+            \STATE {\bfseries Input:} data matrix \( X \), solution \( \theta \).
+            \STATE \( k \gets 0 \), \( \theta^k \gets \theta \).
+            \WHILE {\( \exists \beta \neq 0 \) s.t. \( \sum_{\bi \in \act(\theta^k)} \beta_\bi D_i X \theta_i^k = 0 \)}
+            \STATE \( \vdots \)
+            \ENDWHILE
+            \STATE {\bfseries Output:} final weights \( \theta^k \)
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{itemize}
+        \item Computing \( a_i = D_i X \theta_i^0 \) for every neuron: \( O(ndp)  \)
+              \pause
+              \vspace{1ex}
+        \item Checking for linear dependence: at most \( 2p \) times, do
+              \pause
+              \vspace{1ex}
+              \begin{itemize}
+                  \item check (at most) \( n+1 \) \( a_i \) vectors for linearly dependence.
+                        \pause
+                  \item Form matrix \( A \) and take SVD to compute null space: \( O(n^3) \).
+                        \pause
+                  \item Prune neuron: update at most \( n \) weights.
+                        \pause
+                        \vspace{1ex}
+              \end{itemize}
+    \end{itemize}
+    Total complexity: \( O(ndp + n^3 p) \).
+
+\end{frame}
+
+\begin{frame}{Bonus: Sub-Optimal Pruning}
+
+    \begin{algorithm}[H]
+        \caption{Pruning solutions}
+        \begin{algorithmic}
+            \STATE {\bfseries Input:} data matrix \( X \), solution \( \theta \).
+            \STATE \( k \gets 0 \).
+            \STATE \( \theta^k \gets \theta \).
+            \WHILE {\( \exists \beta \neq 0 \) s.t. \( \bad{\sum_{\bi \in \act(\theta^k)} \beta_\bi D_i X \theta_i^k = 0} \)}
+            \STATE \( \bi^k \gets \argmax_{\bi} \cbr{|\beta_\bi| : \bi \in \act(\theta^k)}  \)
+            \STATE \( t^k \gets 1/|\beta_{\bi^k}| \)
+            \STATE \( \theta^{k+1} \gets \theta^k (1 - t^k \beta_\bi) \)
+            \STATE \( k \gets k + 1 \)
+            \ENDWHILE
+            \STATE {\bfseries Output:} final weights \( \theta^k \)
+        \end{algorithmic}
+    \end{algorithm}
+
+    \pause
+    Approximate with least-squares fit:
+    \[
+        \hat{\beta} \in \argmin_{\beta} \half \norm{\sum_{\bi \in \act(\theta^k) \setminus j} \beta_\bi D_i X \theta_i^k - D_j X \theta_j}_2^2
+    \]
+\end{frame}
+
+\begin{frame}{Bonus: Sub-optimal Pruning}
+    Approximate with least-squares fit:
+    \[
+        \hat \beta \in \argmin_{\beta} \half \norm{\sum_{\bi \in \act(\theta^k) \setminus j} \beta_\bi D_i X \theta_i^k - D_j X \theta_j}_2^2
+    \]
+
+    \horizontalrule
+
+    \begin{itemize}
+        \item Algorithm is just structured pruning with a \good{correction step}!
+              \pause
+        \item We use \good{existing literature} for structured pruning to select \( j \).
+              \pause
+        \item \bad{Brute-force search} works best:
+              \[
+                  \argmin_{j} \cbr{\min_{\beta} \half \norm{\sum_{\bi \in \act(\theta^k) \setminus j} \beta_\bi D_i X \theta_i^k - D_j X \theta_j}_2^2}
+              \]
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Neuron Pruning: Performance on CIFAR-10}
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=0.75\textwidth]{assets/prune_cifar.pdf}
+    \end{figure}
+\end{frame}
+
+\setbeamercolor{background canvas}{bg=LightCyan}
+\begin{frame}{}
+    \begin{center}
+        \huge Convex Reformulations of Deep ReLU Networks
+    \end{center}
+\end{frame}
+\setbeamercolor{background canvas}{bg=white}
+
+\begin{frame}{Deep Reformulations: Setup}
+
+    \begin{itemize}
+        \item Let \( X^{(l)} \) and \( T^{(l)} \) be tensors of order
+              \( l+1 \) indexed by \( i_0, \ldots, i_{l} \).
+
+              \vspace{1ex}
+
+        \item We assume  \( R^{(l)}_{i_1, \ldots, i_{l-1}} \in \R^{n \times d_0} \) and \( T^{(l)}_{i_1, \ldots, i_{l-1}} \in \R^{d_0 \times d_{l}} \).
+
+    \end{itemize}
+
+    \horizontalrule
+
+    We equip these tensors with the reduction product
+    \begin{equation*}\label{eq:reduction-prod}
+        R^{(l)} \odot T^{(l)}
+        = \sum_{i_1, \ldots, i_{l-1}} R^{(l)}_{i_1, \ldots, i_{l-1}}
+        T^{(l)}_{i_1, \ldots, i_{l-1}},
+    \end{equation*}
+
+    \begin{itemize}
+        \item This sums over the product of all the matrix slices
+              \( R^{(l)}_{i_1, \ldots, i_{l-1}} \) and
+              \( T^{(l)}_{i_1, \ldots, i_{l-1}} \).
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Deep Reformulations: Recursive Patterns}
+    \begin{itemize}
+        \item Let \( \calD^{(1)}_X \) be the set of achievable
+              ReLU patterns in the first layer.
+
+        \item Let \( X^{(1)} = X \in \R^{n \times d_0} \).
+
+        \item Define
+              \( X^{(l+1)}_{i_1, \ldots, i_{l}}
+              = D^{(l)}_{i_{l}} X^{(l)}_{i_1, \ldots, i_{l-1}} \)
+              so that we have,
+              \[
+                  \begin{aligned}
+                      X^{(2)}_{i_1}
+                       & = D^{(1)}_{i_1} X^{(1)} = D^{(1)}_{i_1} X                      \\
+                      X^{(3)}_{i_1, i_2}
+                       & = D^{(2)}_{i_2} X^{(2)}_{i_1} = D^{(2)}_{i_2} D^{(1)}_{i_1} X.
+                  \end{aligned}
+              \]
+
+        \item Here, \( D_{i_l}^{(l)} \in \calD^{(l)}_X \) is the set of
+              ReLU patterns achievable by our tensor product in the
+              \( l^{\text{th}} \) layer,
+              \[
+                  \calD_{X}^{(l)}
+                  = \cbr{ \mathds{1}\rbr{ X^{(l)} \odot T^{(l)} \geq 0 } : T^{(l)} \in \R^{d_0 \times \cdots \times d_{l}} }.
+              \]
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Deep Reformulations: Tensor Decomposition}
+
+    Each tensor \( T^{(l)}_{i_{l}} \) is contained in at least
+    one activation cone,
+    \begin{equation*}\label{eq:tensor-cone}
+        \calK^{(l)}_{i_{l}} =
+        \cbr{
+        T^{(l)}_{i_l} \in \R^{d_0 \times \cdots \times d_{(l-1)}}
+        :
+        (2D^{(l)}_{i_{l}} - I)
+        \sbr{X^{(l)} \odot T^{(l)}_{i_{l}}} \geq 0
+        }.
+    \end{equation*}
+
+    Now, let \( \calG^{(1)} = \R^{d_0 \times d_1} \) and define
+    \begin{equation*}\label{eq:rank-tensor-decomp}
+        \begin{aligned}
+            \calG^{(l+1)}
+            :=
+              & \bigg\{
+            T^{(l+1)} \in \R^{d_{0} \times p_{1} \ldots \times p_{l} \times d_{l+1}}  \\
+            : & \exists \, T^{(l)} \in \calG^{(l)} \text{ where }
+            \calI^{(l)}_{j_{l}} = \cbr{ i_l : T^{(l)}_{i_l} \in \calK^{(l)}_{j_{l}}}, \\
+              & \exists \, W^{(l+1)} \in \R^{d_l \times d_{l+1}},                     \\
+              & \text{s.t. } T^{(l+1)}_{j_1, \ldots, j_{l}}
+            = \sum_{i_l \in \calI^{(l)}_{j_l}} T^{(l)}_{j_1, \ldots, j_{l-1}, i_{l}}
+            \otimes
+            W^{(l+1)}_{i_l},                                                          \\
+              & \text{and } \sum_{j_l = 1}^{p_l} \abs{\calI^{(l)}_{j_l}} \leq d_{l}
+            \bigg\}.
+        \end{aligned}
+    \end{equation*}
+\end{frame}
+
+\begin{frame}{Deep Reformulations: Layer-Merging Lemma}
+
+    \begin{lemma}[Rank-Controlled Layer Elimination]
+        Let \( T^{(l)} \in \calG^{(l)} \).
+        Then the activations at layer \( l+2 \) are given by
+        \begin{equation}\label{eq:layer-to-tensorize}
+            Z^{(l+2)} =
+            \rbr{\sum_{i_l=1}^{d_l} \rbr{X^{(l)} \odot T^{(l)}_{i_l}}_+
+                W^{(l+1)}_{i_l}}_+,
+        \end{equation}
+        if and only if the activations are also equal to
+        \[
+            Z^{(l+2)} = \rbr{X^{(l+1)} \odot T^{(l+1)}}_+,
+        \]
+        for some \( T^{(l+1)} \in \calG^{(l+1)} \).
+    \end{lemma}
+\end{frame}
+

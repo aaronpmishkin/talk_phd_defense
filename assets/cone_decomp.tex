@@ -1,0 +1,44 @@
+%! TEX root = ../../main.tex
+
+%% Illustration of cone decomposition. 
+
+\begin{tikzpicture}[scale=1,
+		declare function={
+				cone_u(\x)= -\x/3;
+				cone_l(\x)= -4*\x/5;
+			}
+	]
+	\begin{axis}[width=1.1\linewidth, height=6cm,
+			axis lines=center, yticklabels={,,}, xticklabels={,,},
+			ymin=-4, ymax=4, ytick={-5,...,5}, ylabel=$$, x axis line style={-},
+				xmin=-6, xmax=6, xtick={-5,...,5}, xlabel=$$, y axis line style={-},
+		]
+		\addplot[name path=cone_u, domain=-6:6, samples=100, line width=1pt]{cone_u(x)};
+		\addplot[name path=cone_l, domain=-6:6, samples=200, line width=1pt]{cone_l(x)};
+
+		% add color fill to both cones.
+		\addplot fill between[
+				of = cone_u and cone_l,
+				split, % calculate segments
+				every even segment/.style = {fill=blue, fill opacity=0.3},
+				every odd segment/.style  = {fill=teal, fill opacity=0.3}
+			];
+
+		%% point labels
+		% origin point
+		\node[circle, fill, inner sep=1pt] at (axis cs:0,0) {};
+
+		\node[label={0:$u_j$}, circle, fill, inner sep=1.8pt] (u) at (axis cs:2,1) {};
+		\node[label={90:$v_j$}, circle, fill, inner sep=1.8pt] (v) at (axis cs:25/7+2, -25/21 - 2/3) {};
+		\node[label={90:$w_j$}, circle, fill, inner sep=1.8pt] (w) at (axis cs:-25/7, 20/7) {};
+
+		% labels
+		\node[label={0:$\calK_j$}] at (axis cs:4,-2.5) {};
+		\node[label={180:$-\calK_j$}] at (axis cs:-3.75,2.5) {};
+
+		% lines
+		\draw [->, dashed, draw=red, line width = 0.4mm] (u) edge (w);
+		\draw [->, dashed, draw=red, line width = 0.4mm] (u) edge (v);
+	\end{axis}
+
+\end{tikzpicture}%

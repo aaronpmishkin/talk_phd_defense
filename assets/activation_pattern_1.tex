@@ -1,0 +1,60 @@
+%! TEX root = ../../main.tex
+
+%% Illustration of cone decomposition. 
+
+\begin{tikzpicture}[scale=1,
+		declare function={
+				cone_1(\x)= 3*\x/2;
+				cone_2(\x)= -\x;
+				cone_3(\x)= -4*\x;
+				bounds(\x)= \x - 10;
+			}
+	]
+	\begin{axis}[width=\linewidth, height=8cm,
+			axis lines=center, yticklabels={,,}, xticklabels={,,},
+			ymin=-4, ymax=4, ytick={-5,...,5}, ylabel=$$, x axis line style={-},
+				xmin=-6, xmax=6, xtick={-5,...,5}, xlabel=$$, y axis line style={-},
+		]
+		\addplot[name path=cone_1, domain=-6:6, samples=100, line width=1pt]{cone_1(x)};
+		\addplot[name path=bounds, domain=-6:6, samples=100, line width=1pt]{bounds(x)};
+
+		% add color fill to both cones.
+
+		\addplot fill between[
+				of = cone_1 and bounds,
+				%split, % calculate segment
+				every even segment/.style = {fill=green, fill opacity=0.3},
+			];
+
+		%% point labels
+		% origin point
+		\node[circle, fill, inner sep=1pt] at (axis cs:0,0) {};
+
+		% active examples 
+		\node[label=right:$x_1$, circle, fill, inner sep=0.5mm] at (axis cs:2,2) {};
+		\node[label=right:$x_4$, circle, fill, inner sep=0.5mm] at (axis cs:1.5,-2) {};
+
+		% inactive examples 
+		\node[label=right:$x_2$, circle, line width=0.25mm, draw=black, inner sep=0.5mm] at (axis cs:-3,-2) {};
+		\node[label=right:$x_3$, circle, line width=0.25mm, draw=black, inner sep=0.5mm] at (axis cs:-4,-1) {};
+		\node[label=right:$x_5$, circle, line width=0.25mm, draw=black, inner sep=0.5mm] at (axis cs:0.5,3.5) {};
+
+
+		% activation pattern
+		\node[] at (axis cs:-3.25,2) {
+			$D_j = \begin{bmatrix}
+					1 & 0 & 0 & 0 & 0 \\
+					0 & 0 & 0 & 0 & 0 \\
+					0 & 0 & 0 & 0 & 0 \\
+					0 & 0 & 0 & 1 & 0 \\
+					0 & 0 & 0 & 0 & 0 \\
+				\end{bmatrix}
+			$};
+
+		% lines
+		\draw [->, draw=red, line width = 0.4mm] (axis cs:0,0) -- (axis cs:3,-2) node[midway,above right] {$W_{1j}$};
+		%\draw [->, draw=red, line width = 0.4mm] (axis cs:2,-2) -- (axis cs:3,-1) node[midway,below right] {$S_{22} \cdot x_2$};
+		%\draw [->, draw=red, line width = 0.4mm] (axis cs:0.5,-2) -- (axis cs:-2.5,-2.75) node[pos=0.9,below right] {$S_{33} \cdot x_3$};
+	\end{axis}
+
+\end{tikzpicture}%
