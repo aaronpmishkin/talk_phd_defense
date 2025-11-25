@@ -1,4 +1,4 @@
-# Slides PhD Oral Examination 
+# PhD Oral Examination Slides
 
 These are the slides from my PhD oral exam, which was held on November 18,
 2025. 
